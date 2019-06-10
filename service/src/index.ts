@@ -19,6 +19,6 @@ if (!module.parent) {
   initialize();
   const server = createServer();
   server.listen(config.port, () => {
-    console.log(`server listening on port ${PORT}`);
+    console.log(`server listening on port ${config.port}`);
   });
 }

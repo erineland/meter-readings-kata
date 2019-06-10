@@ -5,6 +5,10 @@
     "target": "es5",
     "moduleResolution": "node",
     "lib": ["es2015"],
-    "resolveJsonModule": true
-  }
+    "declaration": true,
+    "resolveJsonModule": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

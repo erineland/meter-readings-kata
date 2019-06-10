@@ -30,3 +30,17 @@ export function initialize() {
     });
   });
 }
+
+export function getAllMeterReadings() {
+  connection.serialize(() => {
+    connection.all(
+      'SELECT * FROM meter_reads ORDER BY cumulative',
+      (error, selectResult) => {
+        if (error) {
+          console.error(`An error occurred when attempting to read from the database: ${error.message}`);
+          return
+        }
+      }
+    );
+  });
+}
