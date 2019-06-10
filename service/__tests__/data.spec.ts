@@ -1,4 +1,4 @@
-import * as data from './data';
+import * as data from '../src/data';
 import * as sqlite3 from 'sqlite3';
 import 'jest';
 import { read } from 'fs';
