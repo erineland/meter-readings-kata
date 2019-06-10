@@ -28,23 +28,10 @@ describe('data', () => {
   });
 
   describe('When reading meter readings out of the database', () => {
-    // it('reads all of the meter readings out of the database', done => {
-    // data.connection.serialize(() => {
-    //   data.connection.all(
-    //     'SELECT * FROM meter_reads ORDER BY cumulative',
-    //     (error, selectResult) => {
-    //       expect(error).to.be.null;
-    //       expect(selectResult).to.have.length(sampleData.electricity.length);
-    //       selectResult.forEach((row, index) => {
-    //         expect(row.cumulative).to.equal(
-    //           sampleData.electricity[index].cumulative
-    //         );
-    //       });
-    //       done();
-    //     }
-    //   );
-    // });
-    // });
+    it('reads all of the meter readings out of the database', async () => {
+      const meterReadings : any = await data.getAllMeterReadings();
+      expect(meterReadings.length).toEqual(sampleData.electricity.length);
+    });
   });
 
 });
