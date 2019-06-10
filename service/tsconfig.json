@@ -9,7 +9,7 @@
     ],
     "declaration": true,
     "resolveJsonModule": true,
-    "sourceMap": true
+    "sourceMap": true,
   },
   "include": [
     "src/**/*"
@@ -18,11 +18,4 @@
     "node_modules",
     "**/*.spec.ts"
   ],
-  "typeRoots": [
-    "./node_modules/@types",
-  ],
-  "types": [
-    "jest",
-    "jasmine",
-  ]
 }

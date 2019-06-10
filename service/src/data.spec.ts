@@ -1,8 +1,10 @@
 import * as data from './data';
 import * as sqlite3 from 'sqlite3';
-import { jsxEmptyExpression } from '@babel/types';
 const SQLite = sqlite3.verbose();
+import 'jest';
+jest.mock('sqlite3', () => { });
 const sampleData = require('../sampleData.json');
+const mockAll = jest.fn();
 
 describe('data', () => {
   it('initialize should import the data from the sampleData file', done => {
@@ -26,20 +28,6 @@ describe('data', () => {
   });
 
   describe('When reading meter readings out of the database', () => {
-
-    describe('When an error occurs attempting to read from the database', () => {
-
-      beforeEach(() => {
-      })
-
-      it('handles errors gracefully by logging them out', () => {
-        // sinon.stub(console, 'error', () => {});
-        SQLite.Database.all = jest.fn();
-        data.getAllMeterReadings();
-        // sinon.assert.calledOnce(console.error);
-      });
-    })
-
     // it('reads all of the meter readings out of the database', done => {
     // data.connection.serialize(() => {
     //   data.connection.all(
