@@ -2,7 +2,7 @@ import * as data from './data';
 import * as sqlite3 from 'sqlite3';
 const SQLite = sqlite3.verbose();
 import 'jest';
-jest.mock('sqlite3', () => { });
+// jest.mock('sqlite3', () => { });
 const sampleData = require('../sampleData.json');
 const mockAll = jest.fn();
 
