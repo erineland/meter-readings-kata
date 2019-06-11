@@ -9,8 +9,6 @@ router.get('/', (ctx, next) => {
 });
 
 router.get('/readings', async (ctx, next) => {
-
-  // Make a call to the database
   let meterReadings;
   try {
     meterReadings = await data.getAllMeterReadings();
