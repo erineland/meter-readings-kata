@@ -4,9 +4,9 @@ const sampleData = require('../sampleData.json');
 const SQLite = sqlite3.verbose();
 
 // Private utility functions go here...
-function daysBetween(from, to){
-  const toDate : any = new Date(to);
-  const fromDate : any = new Date(from);
+function daysBetween(from, to) {
+  const toDate: any = new Date(to);
+  const fromDate: any = new Date(from);
   const msBetween = (toDate - fromDate) / 1000 / 60 / 60 / 24;
   return Math.floor(msBetween);
 }
@@ -118,24 +118,34 @@ export function calculateMonthlyAverageUsage() {
               const previousReading = selectResults[previousIndex];
               console.log(`The PREVIOUS meter reading is: ${JSON.stringify(previousReading)}`);
 
-              const previousReadingMoment = moment(previousReading.reading_date);
-              // console.log(`The moment representation of the previous reading's date is: ${previousReadingMoment.toString()}`);
-              // console.log(`The moment representation of the current reading's date is: ${currentReadingDateMoment.toString()}`);
-
-               console.log(`The previous reading's date is: ${previousReading.reading_date}`);
-              console.log(`The current reading's date is: ${currentReading.reading_date}`);
+              // console.log(`The previous reading's date is: ${previousReading.reading_date}`);
+              // console.log(`The current reading's date is: ${currentReading.reading_date}`);
 
               const noOfDaysBetweenReadings = daysBetween(
                 previousReading.reading_date,
                 currentReading.reading_date,
               );
-              console.log(`The number of days between the current and previous reading dates is: ${noOfDaysBetweenReadings}`);
+              // console.log(`The number of days between the current and previous reading dates is: ${noOfDaysBetweenReadings}`);
 
               // Find the difference in meter readings between the previous and next reading.
-              console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
-              console.log(`The previous meter reading in kWh is: ${previousReading.cumulative}`);
+              // console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
+              // console.log(`The previous meter reading in kWh is: ${previousReading.cumulative}`);
               const energyUsedBetweenReadings = currentReading.cumulative - previousReading.cumulative;
-              console.log(`The energy used in kWh between current and previous is: ${energyUsedBetweenReadings}`);
+              // console.log(`The energy used in kWh between current and previous is: ${energyUsedBetweenReadings}`);
+
+              // Find the average daily usage
+              const averageDailyEnergyUsage = energyUsedBetweenReadings / noOfDaysBetweenReadings;
+              // console.log(`The average daily energy usage is: ${averageDailyEnergyUsage}`);
+
+              // Find the days between the current reading's reading date and end of reading's month
+              console.log(`The current reading's date is: ${currentReading.reading_date}`);
+              console.log(`The end of the month of the current meter reading is: ${endOfMonthDate.toISOString()}`);
+              const daysToEndOfMonth = daysBetween(
+                currentReading.reading_date,
+                endOfMonthDate.toISOString(),
+              )
+
+              console.log(`The number of days from the current reading's date to the end of the month is: ${daysToEndOfMonth}`);
             }
           });
 
