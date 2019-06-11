@@ -12,6 +12,7 @@
     "sourceMap": true,
     "types": [
       "jest",
+      "nock",
     ]
   },
   "include": [

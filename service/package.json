@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "serve": "node dist/index.js",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "customtests": "jest",
+    "test": "jest",
+    "watch-tests": "jest --watch",
     "watch-node": "nodemon dist/index.js",
     "start": "concurrently --kill-others -c \"yellow.bold,cyan.bold,green.bold\" \"tsc -w\" \"yarn watch-node\""
   },
