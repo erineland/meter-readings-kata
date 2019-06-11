@@ -25,8 +25,7 @@ describe('routes', () => {
     it('should add a new meter reading that gets stored in the database', async done => {
         const newTestReadingToInsert = {
             "cumulative": 99999,
-            "readingDate": "2017-06-11T00:00:00.000Z",
-            "unit": "kWh"
+            "readingDate": "2017-06-11T00:00:00.000Z"
         };
 
         try {
@@ -42,7 +41,7 @@ describe('routes', () => {
                         expect(selectedResult[0].cumulative)
                             .toEqual(newTestReadingToInsert.cumulative);
                         expect(selectedResult[0].unit)
-                            .toEqual(newTestReadingToInsert.unit);
+                            .toEqual('kWh');
                         done();
                     }
                 );

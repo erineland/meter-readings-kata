@@ -25,7 +25,10 @@ router.get('/readings', async (ctx, next) => {
 });
 
 router.post('/recordmeterreading', async (ctx, next) => {
-  const meterReadingToWrite = ctx.request.body;
+  const meterReadingToWrite = {
+    ...ctx.request.body,
+    unit: 'kWh'
+  }
 
   if (meterReadingToWrite) {
     try {
