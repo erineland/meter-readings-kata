@@ -5,14 +5,17 @@
     "target": "es5",
     "moduleResolution": "node",
     "lib": [
-      "es2015"
+      "es6",
+      "dom"
     ],
     "declaration": true,
     "resolveJsonModule": true,
     "sourceMap": true,
   },
   "include": [
-    "src/**/*", "__tests__/index.spec.ts", "__tests__/data.spec.ts"
+    "src/**/*",
+    "__tests__/index.spec.ts",
+    "__tests__/data.spec.ts"
   ],
   "exclude": [
     "node_modules",

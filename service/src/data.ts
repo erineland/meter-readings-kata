@@ -56,7 +56,7 @@ export function writeMeterReading(meterReading) {
       connection.serialize(() => {
         connection.run(
           `INSERT INTO meter_reads (cumulative, reading_date, unit) VALUES (?, ?, ?)`,
-          [meterReading.cumulative, meterReading.reading_date, meterReading.unit]
+          [meterReading.cumulative, meterReading.readingDate, meterReading.unit]
         );
         resolve();
       });

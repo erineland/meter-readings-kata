@@ -36,7 +36,7 @@ describe('data', () => {
     it('writes the provided meter reading object into the database', async done => {
       const newTestReadingToInsert = {
         "cumulative": 99999,
-        "reading_date": "2017-06-11T00:00:00.000Z",
+        "readingDate": "2017-06-11T00:00:00.000Z",
         "unit": "kWh"
       };
 
@@ -47,7 +47,12 @@ describe('data', () => {
             'SELECT * FROM meter_reads WHERE cumulative=99999',
             (error, selectedResult) => {
               expect(error).toBe(null);
-              expect(selectedResult[0]).toEqual(newTestReadingToInsert);
+              expect(selectedResult[0].cumulative)
+                .toEqual(newTestReadingToInsert.cumulative);
+              expect(selectedResult[0].reading_date)
+                .toEqual(newTestReadingToInsert.readingDate);
+              expect(selectedResult[0].unit)
+                .toEqual(newTestReadingToInsert.unit);
               done();
             }
           );

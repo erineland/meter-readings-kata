@@ -21,3 +21,5 @@ Notes:
 - Going to forgo setting up Nock for now, this would be an improvement I make later.
 - Writing a test to write the data into the database via a POST endopint, and asserting it worked by directly querying the in-memory database to find my inserted record.
 - This will first require me extending the data layer with a test and method.
+- Now I've added a failing test for the POST endpoint
+- Implementing the endpoint now, and adding Koa Bodyparser along with it's Type definitions

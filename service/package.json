@@ -2,7 +2,7 @@
   "name": "service",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "serve": "node dist/index.js",

@@ -1,5 +1,5 @@
 import * as Koa from 'koa';
-import * as KoaRouter from 'koa-router';
+import * as bodyParser from 'koa-bodyparser';
 import router from './routes';
 import { config } from './config';
 import { initialize } from './data';
@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 export default function createServer() {
   const server = new Koa();
 
+  server.use(bodyParser());
   server.use(router.allowedMethods());
   server.use(router.routes());
 
