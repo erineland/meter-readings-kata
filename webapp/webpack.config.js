@@ -51,7 +51,7 @@ module.exports = {
 // For local development
 module.exports.devServer = {
     contentBase: './www',
-    port: 9000,
+    port: 9004,
     proxy: {
         "/bulb/api": "http://localhost:8000"
     }

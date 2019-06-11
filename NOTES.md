@@ -23,3 +23,5 @@ Notes:
 - This will first require me extending the data layer with a test and method.
 - Now I've added a failing test for the POST endpoint
 - Implementing the endpoint now, and adding Koa Bodyparser along with it's Type definitions
+- Now I'm on task 3, I've fleshed out a basic approach with a pen and paper, and am now writing a failing test to call the the as yet non-existent endpoint and expect an array back.
+- Now onto implementing the method on the data model, then exposing it via an API endpoint.

@@ -1,7 +1,6 @@
 import 'jest';
 import * as request from 'supertest';
 import * as data from '../src/data';
-// import * as nock from 'nock';
 import server from '../src/index';
 import { config } from '../src/config';
 
@@ -16,8 +15,6 @@ describe('routes', () => {
     });
 
     it('should retrieve a list of meter readings from the database', async () => {
-        // Make a GET request to the /readings endpoint.
-        // Use supertest to send a request to the server
         const response = await request(instance).get('/readings');
         expect(response.body.length).toBe(sampleData.electricity.length);
     });

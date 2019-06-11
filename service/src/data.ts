@@ -1,7 +1,15 @@
 import * as sqlite3 from 'sqlite3';
+import * as moment from 'moment';
 const sampleData = require('../sampleData.json');
-
 const SQLite = sqlite3.verbose();
+
+// Private utility functions go here...
+function daysBetween(from, to){
+  const toDate : any = new Date(to);
+  const fromDate : any = new Date(from);
+  const msBetween = (toDate - fromDate) / 1000 / 60 / 60 / 24;
+  return Math.floor(msBetween);
+}
 
 export const connection = new SQLite.Database(':memory:');
 
@@ -64,5 +72,76 @@ export function writeMeterReading(meterReading) {
       const dataWriteError = new Error(`Error at data.writeMeterReading: ${writeError.message}`);
       reject(dataWriteError);
     }
+  });
+}
+
+export function calculateMonthlyAverageUsage() {
+  // Retrieve all of the data from the table first, ordered by date
+  return new Promise((resolve, reject) => {
+    const monthlyAverages = [];
+
+    connection.serialize(() => {
+      connection.all(
+        'SELECT * FROM meter_reads ORDER BY reading_date ASC',
+        (error, selectResults) => {
+          if (error) {
+            const readError =
+              new Error(`An error occurred attempting to read records in data order: ${error.message}`);
+            reject(readError);
+          }
+
+          console.log(`The data in date order is: ${JSON.stringify(selectResults)}`);
+          console.log(`The number of retrieved results is: ${selectResults.length}`);
+
+          // Iterate the data from the table.
+          selectResults.forEach((currentReading, index) => {
+            console.log(`The current reading being checked is: ${JSON.stringify(currentReading)}`);
+
+            const currentReadingDateMoment = moment(currentReading.reading_date);
+            console.log(`The moment representation of the current reading's date is: ${currentReadingDateMoment.toString()}`);
+
+            // Find the month of the current reading
+            const currentMonth = currentReadingDateMoment.month();
+            console.log(`The month of the current reading is: ${(currentMonth + 1)}`)
+
+            // Find the last day of the current record's month
+            const endOfMonthDate = currentReadingDateMoment.endOf('month');
+            console.log(`The last day of the current reading's month is: ${endOfMonthDate.toString()}`);
+
+            console.log(`The current index is: ${index}`);
+            const previousIndex = index - 1;
+            console.log(`The previous index is: ${previousIndex}`);
+
+            // Don't check previous reading if this is the first reading.
+            if (previousIndex > -1) {
+              // From 2nd to penultimate reading...
+              const previousReading = selectResults[previousIndex];
+              console.log(`The PREVIOUS meter reading is: ${JSON.stringify(previousReading)}`);
+
+              const previousReadingMoment = moment(previousReading.reading_date);
+              // console.log(`The moment representation of the previous reading's date is: ${previousReadingMoment.toString()}`);
+              // console.log(`The moment representation of the current reading's date is: ${currentReadingDateMoment.toString()}`);
+
+               console.log(`The previous reading's date is: ${previousReading.reading_date}`);
+              console.log(`The current reading's date is: ${currentReading.reading_date}`);
+
+              const noOfDaysBetweenReadings = daysBetween(
+                previousReading.reading_date,
+                currentReading.reading_date,
+              );
+              console.log(`The number of days between the current and previous reading dates is: ${noOfDaysBetweenReadings}`);
+
+              // Find the difference in meter readings between the previous and next reading.
+              console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
+              console.log(`The previous meter reading in kWh is: ${previousReading.cumulative}`);
+              const energyUsedBetweenReadings = currentReading.cumulative - previousReading.cumulative;
+              console.log(`The energy used in kWh between current and previous is: ${energyUsedBetweenReadings}`);
+            }
+          });
+
+          resolve(monthlyAverages);
+        }
+      );
+    });
   });
 }

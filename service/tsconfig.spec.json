@@ -12,7 +12,7 @@
     "sourceMap": true,
     "types": [
       "jest",
-      "nock",
+      "moment",
     ]
   },
   "include": [

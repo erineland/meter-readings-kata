@@ -12,8 +12,10 @@
     "start": "concurrently --kill-others -c \"yellow.bold,cyan.bold,green.bold\" \"tsc -w\" \"yarn watch-node\""
   },
   "dependencies": {
+    "@types/moment": "^2.13.0",
     "koa": "2.5.1",
     "koa-router": "7.4.0",
+    "moment": "^2.24.0",
     "sqlite3": "4.0.0"
   },
   "devDependencies": {
