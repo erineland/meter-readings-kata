@@ -17,4 +17,7 @@ Notes:
 - Opted to use async/await because it's clean ES6 syntax
 - In the actual implementation I convert the callback based API of SQLite3 into using native Promises which can be awaited.
 - Also setting up a test watch command so that every time I update a test or implementation the tests are automatically re-run.
-- Now I am going to set up the route in Koa, and test it using Nock and Supertest.
+- Now I am going to set up the route in Koa, and test it using Supertest.
+- Going to forgo setting up Nock for now, this would be an improvement I make later.
+- Writing a test to write the data into the database via a POST endopint, and asserting it worked by directly querying the in-memory database to find my inserted record.
+- This will first require me extending the data layer with a test and method.

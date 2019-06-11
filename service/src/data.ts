@@ -49,3 +49,20 @@ export function getAllMeterReadings() {
     });
   });
 }
+
+export function writeMeterReading(meterReading) {
+  return new Promise((resolve, reject) => {
+    try {
+      connection.serialize(() => {
+        connection.run(
+          `INSERT INTO meter_reads (cumulative, reading_date, unit) VALUES (?, ?, ?)`,
+          [meterReading.cumulative, meterReading.reading_date, meterReading.unit]
+        );
+        resolve();
+      });
+    } catch (writeError) {
+      const dataWriteError = new Error(`Error at data.writeMeterReading: ${writeError.message}`);
+      reject(dataWriteError);
+    }
+  });
+}

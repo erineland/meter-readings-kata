@@ -1,6 +1,5 @@
 import * as KoaRouter from 'koa-router';
 import * as data from './data';
-import { continueStatement, metaProperty } from '@babel/types';
 const router = new KoaRouter();
 
 router.get('/', (ctx, next) => {
@@ -24,5 +23,9 @@ router.get('/readings', async (ctx, next) => {
   ctx.body = meterReadings;
   next();
 });
+
+// router.post('/recordmeterreading', async (ctx, next) => {
+
+// });
 
 export default router;

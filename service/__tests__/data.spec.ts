@@ -1,7 +1,7 @@
 import * as data from '../src/data';
 import * as sqlite3 from 'sqlite3';
 import 'jest';
-import { read } from 'fs';
+import { read, write } from 'fs';
 const sampleData = require('../sampleData.json');
 
 describe('data', () => {
@@ -26,31 +26,36 @@ describe('data', () => {
   });
 
   describe('When reading meter readings out of the database', () => {
-    describe('When the read operation is successful', () => {
-      it('reads all of the meter readings out of the database', async () => {
-        const meterReadings: any = await data.getAllMeterReadings();
-        expect(meterReadings.length).toEqual(sampleData.electricity.length);
-      });
+    it('reads all of the meter readings out of the database', async () => {
+      const meterReadings: any = await data.getAllMeterReadings();
+      expect(meterReadings.length).toEqual(sampleData.electricity.length);
     });
+  });
 
-    // describe('When the read operation is unsuccessful', () => {
-    //   beforeEach(() => {
-    //     // sqlite3('sqlite3', () => {
-    //     //   Database: () => {
-    //     //     all: jest.fn((query, cb) => cb(new Error('all error'), null));
-    //     //     serialize: cb => cb();
-    //     //   }
-    //     // });
-    //   });
+  describe('When writing a meter reading into the database', () => {
+    it('writes the provided meter reading object into the database', async done => {
+      const newTestReadingToInsert = {
+        "cumulative": 99999,
+        "reading_date": "2017-06-11T00:00:00.000Z",
+        "unit": "kWh"
+      };
 
-    //   it('Should reject the promise with an error', async () => {
-    //     try {
-    //       const meterReadings: any = await data.getAllMeterReadings();
-    //     } catch (readError) {
-    //       expect(readError.message)
-    //         .toBe('An error poo when attempting to read from the database: all error');
-    //     }
-    //   })
-    // });
+      try {
+        await data.writeMeterReading(newTestReadingToInsert);
+        data.connection.serialize(() => {
+          data.connection.all(
+            'SELECT * FROM meter_reads WHERE cumulative=99999',
+            (error, selectedResult) => {
+              expect(error).toBe(null);
+              expect(selectedResult[0]).toEqual(newTestReadingToInsert);
+              done();
+            }
+          );
+        });
+      } catch (writeTestError) {
+        expect(writeTestError).toBe(null);
+      }
+
+    });
   });
 });
