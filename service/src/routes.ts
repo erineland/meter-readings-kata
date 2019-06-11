@@ -1,5 +1,6 @@
 import * as KoaRouter from 'koa-router';
-
+import * as data from './data';
+import { continueStatement, metaProperty } from '@babel/types';
 const router = new KoaRouter();
 
 router.get('/', (ctx, next) => {
@@ -8,13 +9,22 @@ router.get('/', (ctx, next) => {
 });
 
 router.get('/readings', async (ctx, next) => {
-    // Make a call to the database
 
-    // Have success and error handling
-
-    ctx.status = 201;
-    ctx.body = 'test';
+  // Make a call to the database
+  let meterReadings;
+  try {
+    meterReadings = await data.getAllMeterReadings();
+  } catch (getReadingsError) {
+    const readingsError = new Error(`An error occurred at get '/readings': ${getReadingsError.message}`)
+    ctx.status = 500;
+    ctx.body = readingsError.message;
+    ctx.app.emit('error', readingsError, ctx);
     next();
+  }
+
+  ctx.status = 200;
+  ctx.body = meterReadings;
+  next();
 });
 
 export default router;
