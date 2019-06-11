@@ -138,14 +138,27 @@ export function calculateMonthlyAverageUsage() {
               // console.log(`The average daily energy usage is: ${averageDailyEnergyUsage}`);
 
               // Find the days between the current reading's reading date and end of reading's month
-              console.log(`The current reading's date is: ${currentReading.reading_date}`);
-              console.log(`The end of the month of the current meter reading is: ${endOfMonthDate.toISOString()}`);
+              // console.log(`The current reading's date is: ${currentReading.reading_date}`);
+              // console.log(`The end of the month of the current meter reading is: ${endOfMonthDate.toISOString()}`);
               const daysToEndOfMonth = daysBetween(
                 currentReading.reading_date,
                 endOfMonthDate.toISOString(),
               )
+              console.log(
+                `The number of days from the current reading's date to the end of the month is: ${daysToEndOfMonth}`
+              );
 
-              console.log(`The number of days from the current reading's date to the end of the month is: ${daysToEndOfMonth}`);
+              // Find the amount of energy usage to add to the current reading, to get end of month usage
+              const estimatedEnergyUsageUntilEndOfMonth =
+                daysToEndOfMonth * averageDailyEnergyUsage;
+              console.log(
+                `The extra amount of energy estimated to be used up until the end of the month in kWh is: ${estimatedEnergyUsageUntilEndOfMonth}`
+              );
+
+              console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
+              // Now calculate the actual reading at the end of the month of the current reading.
+              const endOfMonthReadingEstimate = currentReading.cumulative + estimatedEnergyUsageUntilEndOfMonth;
+              console.log(`The estimated energy reading in kWh at the end of the month of the current reading is: ${endOfMonthReadingEstimate}`);
             }
           });
 
