@@ -165,7 +165,7 @@ export function calculateMonthlyAverageUsage() {
               const endOfMonthEstimate = {
                 month: currentReadingDateMoment.format('MMMM'),
                 year: currentReadingDateMoment.format('YYYY'),
-                estimateInKwh: endOfMonthReadingEstimate,
+                estimateInKwh: Math.round(endOfMonthReadingEstimate),
               }
               console.log(`The end of month estimate for the current reading's month is: ${JSON.stringify(endOfMonthEstimate)}`);
               endOfMonthReadingEstimates.push(endOfMonthEstimate);
@@ -182,7 +182,7 @@ export function calculateMonthlyAverageUsage() {
               const monthlyReadingEstimate = {
                 month: endOfMonthReading.month,
                 year: endOfMonthReading.year,
-                estimateEnergyUsageInKwh: endOfMonthReading.estimateInKwh - endOfMonthReadingEstimates[index - 1].estimateInKwh,
+                estimateEnergyUsageInKwh: Math.round(endOfMonthReading.estimateInKwh - endOfMonthReadingEstimates[index - 1].estimateInKwh),
               }
               console.log(
                 `The estimated energy used in the whole month of the current reading is: ${JSON.stringify(monthlyReadingEstimate)}`
