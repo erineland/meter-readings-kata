@@ -45,14 +45,31 @@ router.post('/recordmeterreading', async (ctx, next) => {
     }
   } else {
     const noDataError =
-        new Error(
-          'Please post a valid meter reading to this endpoint.'
-        );
-      ctx.status = 500;
-      ctx.body = noDataError.message;
-      ctx.app.emit('error', noDataError, ctx);
-      next();
+      new Error(
+        'Please post a valid meter reading to this endpoint.'
+      );
+    ctx.status = 500;
+    ctx.body = noDataError.message;
+    ctx.app.emit('error', noDataError, ctx);
+    next();
   }
+});
+
+router.get('/estimatedmonthlyusages', async (ctx, next) => {
+  let averageMonthlyUsages;
+  try {
+    averageMonthlyUsages = await data.calculateMonthlyAverageUsage();
+  } catch (getReadingsError) {
+    const readingsError = new Error(`An error occurred at get '/readings': ${getReadingsError.message}`)
+    ctx.status = 500;
+    ctx.body = readingsError.message;
+    ctx.app.emit('error', readingsError, ctx);
+    next();
+  }
+
+  ctx.status = 200;
+  ctx.body = averageMonthlyUsages;
+  next();
 });
 
 export default router;

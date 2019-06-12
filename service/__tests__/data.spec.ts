@@ -68,7 +68,7 @@ describe('data', () => {
       try {
         data.initialize();
         const monthlyAverageUsages: any = await data.calculateMonthlyAverageUsage();
-        expect(monthlyAverageUsages.length).not.toEqual(0);
+        expect(monthlyAverageUsages.length).toEqual(12);
       } catch (error) {
         expect(error).toBe(null);
       }

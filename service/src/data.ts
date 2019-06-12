@@ -39,6 +39,14 @@ export function initialize() {
   });
 }
 
+export function destroy() {
+  connection.serialize(() => {
+    connection.run(
+      'DROP TABLE meter_reads'
+    );
+  });
+}
+
 export function getAllMeterReadings() {
   return new Promise((resolve, reject) => {
     connection.serialize(() => {
@@ -103,8 +111,8 @@ export function calculateMonthlyAverageUsage() {
             console.log(`The moment representation of the current reading's date is: ${currentReadingDateMoment.toString()}`);
 
             // Find the last day of the current record's month
-            const endOfMonthDate = currentReadingDateMoment.endOf('month');
-            console.log(`The last day of the current reading's month is: ${endOfMonthDate.toString()}`);
+            const endOfCurrentReadingsMonthDate = currentReadingDateMoment.endOf('month');
+            console.log(`The last day of the current reading's month is: ${endOfCurrentReadingsMonthDate.toString()}`);
 
             const previousIndex = index - 1;
             console.log(`The previous index is: ${previousIndex}`);
@@ -143,10 +151,10 @@ export function calculateMonthlyAverageUsage() {
 
               // Find the days between the current reading's reading date and end of reading's month
               console.log(`The current reading's date is: ${currentReading.reading_date}`);
-              console.log(`The end of the month of the current meter reading is: ${endOfMonthDate.toISOString()}`);
+              console.log(`The end of the month of the current meter reading is: ${endOfCurrentReadingsMonthDate.toISOString()}`);
               const daysToEndOfMonth = daysBetween(
                 currentReading.reading_date,
-                endOfMonthDate.toISOString(),
+                endOfCurrentReadingsMonthDate.toISOString(),
               )
               console.log(
                 `The number of days from the current reading's date to the end of the month is: ${daysToEndOfMonth}`
