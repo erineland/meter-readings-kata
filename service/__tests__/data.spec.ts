@@ -63,12 +63,26 @@ describe('data', () => {
     });
   });
 
-  describe.only('When attempting to get the average monthly usage for each month', () => {
+  describe('When attempting to get the average monthly usage for each month', () => {
     it('calculates and returns the average monthly usage for all months which have a meter reading', async () => {
       try {
         data.initialize();
+        const expectedMonthlyUsages = [
+          { "month": "April", "year": "2017", "estimateEnergyUsageInKwh": 307 },
+          { "month": "May", "year": "2017", "estimateEnergyUsageInKwh": 235 },
+          { "month": "June", "year": "2017", "estimateEnergyUsageInKwh": 169 },
+          { "month": "July", "year": "2017", "estimateEnergyUsageInKwh": 132 },
+          { "month": "August", "year": "2017", "estimateEnergyUsageInKwh": 167 },
+          { "month": "September", "year": "2017", "estimateEnergyUsageInKwh": 157 },
+          { "month": "October", "year": "2017", "estimateEnergyUsageInKwh": 251 },
+          { "month": "November", "year": "2017", "estimateEnergyUsageInKwh": 358 },
+          { "month": "December", "year": "2017", "estimateEnergyUsageInKwh": 281 },
+          { "month": "January", "year": "2018", "estimateEnergyUsageInKwh": 339 },
+          { "month": "February", "year": "2018", "estimateEnergyUsageInKwh": 329 },
+          { "month": "March", "year": "2018", "estimateEnergyUsageInKwh": 198 },
+        ]
         const monthlyAverageUsages: any = await data.calculateMonthlyAverageUsage();
-        expect(monthlyAverageUsages.length).toEqual(11);
+        expect(monthlyAverageUsages).toEqual(expectedMonthlyUsages);
       } catch (error) {
         expect(error).toBe(null);
       }

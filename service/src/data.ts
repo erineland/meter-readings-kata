@@ -113,8 +113,10 @@ export function calculateMonthlyAverageUsage() {
             reject(readError);
           }
 
+          console.log(`The number of readings from the database is: ${selectResults.length}`);
           // Iterate the data from the table.
           selectResults.forEach((currentActualReading, index) => {
+            console.log(`${index + 1}: The actual reading is: ${JSON.stringify(currentActualReading)}`)
             const currentReadingDateMoment = moment(currentActualReading.reading_date);
 
             // Find the last day of the current record's month
@@ -123,7 +125,7 @@ export function calculateMonthlyAverageUsage() {
             const nextIndex = index + 1;
 
             // Don't check next reading if this is the last reading.
-            if (nextIndex + 1 < selectResults.length) {
+            if (nextIndex < selectResults.length) {
               // From 1st to penultimate reading...
               const nextActualReading = selectResults[nextIndex];
 
@@ -168,8 +170,10 @@ export function calculateMonthlyAverageUsage() {
             }
           });
 
+
           // Now calculate the monthly use, using the end of month reading estimates.
           endOfMonthReadingEstimates.forEach((endOfMonthReading, index) => {
+            console.log(`${index + 1}: The estimate for the month ${endOfMonthReading.month}, ${endOfMonthReading.year} is: ${endOfMonthReading.estimateInKwh}`);
             if (index > 0) {
               let estimateEnergyUsageInKwh;
               const currentMonthEstimate = endOfMonthReading.estimateInKwh;

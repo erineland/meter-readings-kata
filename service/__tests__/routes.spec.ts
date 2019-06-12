@@ -73,7 +73,8 @@ describe('routes', () => {
             { "month": "November", "year": "2017", "estimateEnergyUsageInKwh": 358 },
             { "month": "December", "year": "2017", "estimateEnergyUsageInKwh": 281 },
             { "month": "January", "year": "2018", "estimateEnergyUsageInKwh": 339 },
-            { "month": "February", "year": "2018", "estimateEnergyUsageInKwh": 329}
+            { "month": "February", "year": "2018", "estimateEnergyUsageInKwh": 329},
+            { "month": "March", "year": "2018", "estimateEnergyUsageInKwh": 198 },
         ]
 
         try {
