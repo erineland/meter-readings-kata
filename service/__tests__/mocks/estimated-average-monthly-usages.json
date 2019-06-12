@@ -1,69 +1,63 @@
 {
     "monthlyUsageEstimates": [
         {
-            "month": "April",
-            "year": "2017",
-            "estimateInKwh": 17908
-        },
-        {
             "month": "May",
-            "year": "2017",
-            "estimateInKwh": 18245
+            "year": "2017"
         },
         {
             "month": "June",
             "year": "2017",
-            "estimateInKwh": 18348
+            "estimateEnergyUsageInKwh": 103
         },
         {
             "month": "July",
             "year": "2017",
-            "estimateInKwh": 18453
+            "estimateEnergyUsageInKwh": 208
         },
         {
             "month": "August",
             "year": "2017",
-            "estimateInKwh": 18620
+            "estimateEnergyUsageInKwh": 375
         },
         {
             "month": "September",
             "year": "2017",
-            "estimateInKwh": 18806
+            "estimateEnergyUsageInKwh": 561
         },
         {
             "month": "October",
             "year": "2017",
-            "estimateInKwh": 18924
+            "estimateEnergyUsageInKwh": 679
         },
         {
             "month": "November",
             "year": "2017",
-            "estimateInKwh": 19946
+            "estimateEnergyUsageInKwh": 1701
         },
         {
             "month": "December",
             "year": "2017",
-            "estimateInKwh": 0
+            "estimateEnergyUsageInKwh": 0
         },
         {
             "month": "January",
             "year": "2018",
-            "estimateInKwh": 19964
+            "estimateEnergyUsageInKwh": 1719
         },
         {
             "month": "February",
             "year": "2018",
-            "estimateInKwh": 20424
+            "estimateEnergyUsageInKwh": 2179
         },
         {
             "month": "March",
             "year": "2018",
-            "estimateInKwh": 20492
+            "estimateEnergyUsageInKwh": 2247
         },
         {
             "month": "April",
             "year": "2018",
-            "estimateInKwh": 20757
+            "estimateEnergyUsageInKwh": 2512
         }
     ]
 }

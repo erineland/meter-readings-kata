@@ -194,17 +194,25 @@ export function calculateMonthlyAverageUsage() {
           console.log(`The list of end of month estimated readings is: ${JSON.stringify(endOfMonthReadingEstimates)}`);
           // Now use the end of month readings to come up with monthly usages.
           endOfMonthReadingEstimates.forEach((endOfMonthReading, index) => {
-            console.log(`index is: ${index}`);
+            console.log(`Current estimate index is: ${index}`);
 
             if (index > 0) {
               // Now calculate the monthly use, using the end of month reading estimates.
               let estimateEnergyUsageInKwh;
 
-              const currentMonthReading = endOfMonthReading.estimateInKwh;
-              if (currentMonthReading > 0) {
-                const previousMonthReading = endOfMonthReadingEstimates[index - 1].estimateInKwh;
-                estimateEnergyUsageInKwh = Math.round(endOfMonthReading.estimateInKwh - previousMonthReading);
-              } else {
+              const currentMonthEstimate = endOfMonthReading.estimateInKwh;
+              console.log(`The current month's estimate is: ${currentMonthEstimate}`);
+
+              // Loop to find viable previous month estimate against which to compare. Must be more than 0
+              let previousEstimateIndex = index - 1;
+              let previousMonthEstimate;
+
+              previousMonthEstimate = endOfMonthReadingEstimates[previousEstimateIndex].estimateInKwh;
+              console.log(`previousMonthEstimate is: ${previousMonthEstimate}`);
+
+              if (currentMonthEstimate > 0 && previousMonthEstimate > 0) {
+                estimateEnergyUsageInKwh = Math.round(currentMonthEstimate - previousMonthEstimate);
+              } else if (currentMonthEstimate === 0) {
                 estimateEnergyUsageInKwh = 0;
               }
 
