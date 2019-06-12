@@ -96,22 +96,19 @@ export function calculateMonthlyAverageUsage() {
 
           // Iterate the data from the table.
           selectResults.forEach((currentReading, index) => {
+            console.log(`\n\n NEXT ITERATION: ${moment(currentReading.reading_date).format('MMMM, YYYY')}: \n`);
             console.log(`The current reading being checked is: ${JSON.stringify(currentReading)}`);
 
             const currentReadingDateMoment = moment(currentReading.reading_date);
             console.log(`The moment representation of the current reading's date is: ${currentReadingDateMoment.toString()}`);
 
-            // Find the month of the current reading
-            const currentMonth = currentReadingDateMoment.month();
-            console.log(`The month of the current reading is: ${(currentMonth + 1)}`)
-
             // Find the last day of the current record's month
             const endOfMonthDate = currentReadingDateMoment.endOf('month');
             console.log(`The last day of the current reading's month is: ${endOfMonthDate.toString()}`);
 
-            console.log(`The current index is: ${index}`);
             const previousIndex = index - 1;
             console.log(`The previous index is: ${previousIndex}`);
+            console.log(`The current index is: ${index}`);
 
             // Don't check previous reading if this is the first reading.
             if (previousIndex > -1) {
@@ -126,21 +123,27 @@ export function calculateMonthlyAverageUsage() {
                 previousReading.reading_date,
                 currentReading.reading_date,
               );
-              // console.log(`The number of days between the current and previous reading dates is: ${noOfDaysBetweenReadings}`);
+              console.log(`The number of days between the current and previous reading dates is: ${noOfDaysBetweenReadings}`);
 
               // Find the difference in meter readings between the previous and next reading.
-              // console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
-              // console.log(`The previous meter reading in kWh is: ${previousReading.cumulative}`);
+              console.log(`The previous meter reading in kWh is: ${previousReading.cumulative}`);
+              console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
               const energyUsedBetweenReadings = currentReading.cumulative - previousReading.cumulative;
-              // console.log(`The energy used in kWh between current and previous is: ${energyUsedBetweenReadings}`);
+              console.log(`The energy used in kWh between current and previous is: ${energyUsedBetweenReadings}`);
 
               // Find the average daily usage
+              // TODO: This could be the problem area... Math.abs() ?
               const averageDailyEnergyUsage = energyUsedBetweenReadings / noOfDaysBetweenReadings;
-              // console.log(`The average daily energy usage is: ${averageDailyEnergyUsage}`);
+              console.log(`The average daily energy usage is: ${averageDailyEnergyUsage}`);
+
+              // HANDLE CASE: what if you estimate that it's higher than it actually is!!!!
+              // PROBLEM: The estimate for the month was WAY HIGHER than the actual reading for the month!!!!
+              // Add this edge case to how you work out the ESTIMATE.
+              // (diff in usage previous -> current) / days between
 
               // Find the days between the current reading's reading date and end of reading's month
-              // console.log(`The current reading's date is: ${currentReading.reading_date}`);
-              // console.log(`The end of the month of the current meter reading is: ${endOfMonthDate.toISOString()}`);
+              console.log(`The current reading's date is: ${currentReading.reading_date}`);
+              console.log(`The end of the month of the current meter reading is: ${endOfMonthDate.toISOString()}`);
               const daysToEndOfMonth = daysBetween(
                 currentReading.reading_date,
                 endOfMonthDate.toISOString(),
@@ -158,8 +161,23 @@ export function calculateMonthlyAverageUsage() {
 
               console.log(`The current meter reading in kWh is: ${currentReading.cumulative}`);
               // Now calculate the actual reading at the end of the month of the current reading.
-              const endOfMonthReadingEstimate = currentReading.cumulative + estimatedEnergyUsageUntilEndOfMonth;
+              let endOfMonthReadingEstimate = currentReading.cumulative + estimatedEnergyUsageUntilEndOfMonth;
               console.log(`The estimated energy reading in kWh at the end of the month of the current reading is: ${endOfMonthReadingEstimate}`);
+
+              /* EDGE CASE:
+                If energy usage rate, changed dramatically between the 2 readings.
+                If the ESTIMATE for the END of the current reading's month is LOWER than the previous end of month reading.
+                Then AS A POSSIBLE SOLUTION, simply say 0 energy used in that month,
+                as the previous month's higher estimate bill will ensure average energy is paid across the months...
+              */
+              const previousEstimate = endOfMonthReadingEstimates[endOfMonthReadingEstimates.length - 1];
+              console.log(`The previous estimate is: ${JSON.stringify(previousEstimate)}`);
+              if (previousEstimate) {
+                console.log(`The endOfMonthReadingEstimate is: ${endOfMonthReadingEstimate} the previousEstimate.estimateInKwh: ${previousEstimate.estimateInKwh}`);
+                if (endOfMonthReadingEstimate < previousEstimate.estimateInKwh) {
+                  endOfMonthReadingEstimate = 0;
+                }
+              }
 
               // Construct an object and store the end of month estimate
               const endOfMonthEstimate = {
@@ -169,6 +187,7 @@ export function calculateMonthlyAverageUsage() {
               }
               console.log(`The end of month estimate for the current reading's month is: ${JSON.stringify(endOfMonthEstimate)}`);
               endOfMonthReadingEstimates.push(endOfMonthEstimate);
+              console.log(`\n\n END OF ITERATION \n\n`);
             }
           });
 
@@ -176,6 +195,8 @@ export function calculateMonthlyAverageUsage() {
           // Now use the end of month readings to come up with monthly usages.
           endOfMonthReadingEstimates.forEach((endOfMonthReading, index) => {
             console.log(`index is: ${index}`);
+
+            // handle here? if reading < estimate use reading!!!
 
             if (index > 0) {
               // Now calculate the monthly use, using the end of month reading estimates.
@@ -187,11 +208,11 @@ export function calculateMonthlyAverageUsage() {
               console.log(
                 `The estimated energy used in the whole month of the current reading is: ${JSON.stringify(monthlyReadingEstimate)}`
               );
-              monthlyReadingEstimates.push(monthlyReadingEstimates);
+              monthlyReadingEstimates.push(monthlyReadingEstimate);
             }
           });
 
-          console.log(`The list of monthly estimate usages is now: ${monthlyReadingEstimates}`);
+          console.log(`The list of monthly estimate usages is now: ${JSON.stringify(monthlyReadingEstimates)}`);
 
           resolve(monthlyReadingEstimates);
         }

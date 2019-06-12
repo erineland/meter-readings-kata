@@ -1,0 +1,69 @@
+{
+    "monthlyUsageEstimates": [
+        {
+            "month": "April",
+            "year": "2017",
+            "estimateInKwh": 17908
+        },
+        {
+            "month": "May",
+            "year": "2017",
+            "estimateInKwh": 18245
+        },
+        {
+            "month": "June",
+            "year": "2017",
+            "estimateInKwh": 18348
+        },
+        {
+            "month": "July",
+            "year": "2017",
+            "estimateInKwh": 18453
+        },
+        {
+            "month": "August",
+            "year": "2017",
+            "estimateInKwh": 18620
+        },
+        {
+            "month": "September",
+            "year": "2017",
+            "estimateInKwh": 18806
+        },
+        {
+            "month": "October",
+            "year": "2017",
+            "estimateInKwh": 18924
+        },
+        {
+            "month": "November",
+            "year": "2017",
+            "estimateInKwh": 19946
+        },
+        {
+            "month": "December",
+            "year": "2017",
+            "estimateInKwh": 0
+        },
+        {
+            "month": "January",
+            "year": "2018",
+            "estimateInKwh": 19964
+        },
+        {
+            "month": "February",
+            "year": "2018",
+            "estimateInKwh": 20424
+        },
+        {
+            "month": "March",
+            "year": "2018",
+            "estimateInKwh": 20492
+        },
+        {
+            "month": "April",
+            "year": "2018",
+            "estimateInKwh": 20757
+        }
+    ]
+}

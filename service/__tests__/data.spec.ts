@@ -63,9 +63,10 @@ describe('data', () => {
     });
   });
 
-  describe('When attempting to get the average monthly usage for each month', () => {
+  describe.only('When attempting to get the average monthly usage for each month', () => {
     it('calculates and returns the average monthly usage for all months which have a meter reading', async () => {
       try {
+        data.initialize();
         const monthlyAverageUsages: any = await data.calculateMonthlyAverageUsage();
         expect(monthlyAverageUsages.length).not.toEqual(0);
       } catch (error) {
