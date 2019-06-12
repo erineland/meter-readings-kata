@@ -149,7 +149,6 @@ export function calculateMonthlyAverageUsage() {
                   currentActualReading.reading_date,
                   endOfCurrentReadingsMonthDate.toISOString(),
                 )
-                console.log(`The no of days until the end of the current reading month is: ${daysToEndOfMonth}`);
 
                 // Find ADDITIONAL the amount of energy usage to add to the current reading, to get end of month usage
                 const estimatedAdditionalUsage =
@@ -165,7 +164,6 @@ export function calculateMonthlyAverageUsage() {
                 estimateInKwh: Math.round(endOfMonthReadingEstimate),
               }
 
-              console.log(`The endOfMonthEstimate is: ${JSON.stringify(endOfMonthEstimate)}`);
               endOfMonthReadingEstimates.push(endOfMonthEstimate);
             }
           });
@@ -187,8 +185,6 @@ export function calculateMonthlyAverageUsage() {
               monthlyReadingEstimates.push(monthlyReadingEstimate);
             }
           });
-
-          console.info(`The monthlyReadingEstimates are: ${JSON.stringify(monthlyReadingEstimates)}`);
 
           resolve(monthlyReadingEstimates);
         }
