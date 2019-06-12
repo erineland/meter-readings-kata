@@ -168,10 +168,30 @@ export function calculateMonthlyAverageUsage() {
                 estimateInKwh: endOfMonthReadingEstimate,
               }
               console.log(`The end of month estimate for the current reading's month is: ${JSON.stringify(endOfMonthEstimate)}`);
-
-              endOfMonthReadingEstimates.push();
+              endOfMonthReadingEstimates.push(endOfMonthEstimate);
             }
           });
+
+          console.log(`The list of end of month estimated readings is: ${JSON.stringify(endOfMonthReadingEstimates)}`);
+          // Now use the end of month readings to come up with monthly usages.
+          endOfMonthReadingEstimates.forEach((endOfMonthReading, index) => {
+            console.log(`index is: ${index}`);
+
+            if (index > 0) {
+              // Now calculate the monthly use, using the end of month reading estimates.
+              const monthlyReadingEstimate = {
+                month: endOfMonthReading.month,
+                year: endOfMonthReading.year,
+                estimateEnergyUsageInKwh: endOfMonthReading.estimateInKwh - endOfMonthReadingEstimates[index - 1].estimateInKwh,
+              }
+              console.log(
+                `The estimated energy used in the whole month of the current reading is: ${JSON.stringify(monthlyReadingEstimate)}`
+              );
+              monthlyReadingEstimates.push(monthlyReadingEstimates);
+            }
+          });
+
+          console.log(`The list of monthly estimate usages is now: ${monthlyReadingEstimates}`);
 
           resolve(monthlyReadingEstimates);
         }
