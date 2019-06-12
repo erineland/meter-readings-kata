@@ -2,7 +2,8 @@
     "monthlyUsageEstimates": [
         {
             "month": "May",
-            "year": "2017"
+            "year": "2017",
+            "estimateEnergyUsageInKwh": 337
         },
         {
             "month": "June",
@@ -12,27 +13,27 @@
         {
             "month": "July",
             "year": "2017",
-            "estimateEnergyUsageInKwh": 208
+            "estimateEnergyUsageInKwh": 105
         },
         {
             "month": "August",
             "year": "2017",
-            "estimateEnergyUsageInKwh": 375
+            "estimateEnergyUsageInKwh": 167
         },
         {
             "month": "September",
             "year": "2017",
-            "estimateEnergyUsageInKwh": 561
+            "estimateEnergyUsageInKwh": 186
         },
         {
             "month": "October",
             "year": "2017",
-            "estimateEnergyUsageInKwh": 679
+            "estimateEnergyUsageInKwh": 118
         },
         {
             "month": "November",
             "year": "2017",
-            "estimateEnergyUsageInKwh": 1701
+            "estimateEnergyUsageInKwh": 1022
         },
         {
             "month": "December",
@@ -42,22 +43,22 @@
         {
             "month": "January",
             "year": "2018",
-            "estimateEnergyUsageInKwh": 1719
+            "estimateEnergyUsageInKwh": 18
         },
         {
             "month": "February",
             "year": "2018",
-            "estimateEnergyUsageInKwh": 2179
+            "estimateEnergyUsageInKwh": 460
         },
         {
             "month": "March",
             "year": "2018",
-            "estimateEnergyUsageInKwh": 2247
+            "estimateEnergyUsageInKwh": 68
         },
         {
             "month": "April",
             "year": "2018",
-            "estimateEnergyUsageInKwh": 2512
+            "estimateEnergyUsageInKwh": 265
         }
     ]
 }

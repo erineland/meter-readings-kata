@@ -204,11 +204,17 @@ export function calculateMonthlyAverageUsage() {
               console.log(`The current month's estimate is: ${currentMonthEstimate}`);
 
               // Loop to find viable previous month estimate against which to compare. Must be more than 0
-              let previousEstimateIndex = index - 1;
-              let previousMonthEstimate;
+              let previousMonthEstimate = 0;
+              let previousEstimateIndex;
 
-              previousMonthEstimate = endOfMonthReadingEstimates[previousEstimateIndex].estimateInKwh;
-              console.log(`previousMonthEstimate is: ${previousMonthEstimate}`);
+              // while (previousMonthEstimate === 0) {
+              for (previousEstimateIndex = index - 1; previousMonthEstimate < 1; previousEstimateIndex--) {
+                console.log(`Attempting to find a non-zero previous monthly estimate`);
+                console.log(`The previous estimate index is: ${previousEstimateIndex}`);
+                previousMonthEstimate = endOfMonthReadingEstimates[previousEstimateIndex].estimateInKwh;
+                console.log(`The previous month estimate is: ${previousMonthEstimate}`);
+              }
+
 
               if (currentMonthEstimate > 0 && previousMonthEstimate > 0) {
                 estimateEnergyUsageInKwh = Math.round(currentMonthEstimate - previousMonthEstimate);
