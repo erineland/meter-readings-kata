@@ -78,7 +78,8 @@ export function writeMeterReading(meterReading) {
 export function calculateMonthlyAverageUsage() {
   // Retrieve all of the data from the table first, ordered by date
   return new Promise((resolve, reject) => {
-    const monthlyAverages = [];
+    const endOfMonthReadingEstimates = [];
+    const monthlyReadingEstimates = [];
 
     connection.serialize(() => {
       connection.all(
@@ -159,10 +160,20 @@ export function calculateMonthlyAverageUsage() {
               // Now calculate the actual reading at the end of the month of the current reading.
               const endOfMonthReadingEstimate = currentReading.cumulative + estimatedEnergyUsageUntilEndOfMonth;
               console.log(`The estimated energy reading in kWh at the end of the month of the current reading is: ${endOfMonthReadingEstimate}`);
+
+              // Construct an object and store the end of month estimate
+              const endOfMonthEstimate = {
+                month: currentReadingDateMoment.format('MMMM'),
+                year: currentReadingDateMoment.format('YYYY'),
+                estimateInKwh: endOfMonthReadingEstimate,
+              }
+              console.log(`The end of month estimate for the current reading's month is: ${JSON.stringify(endOfMonthEstimate)}`);
+
+              endOfMonthReadingEstimates.push();
             }
           });
 
-          resolve(monthlyAverages);
+          resolve(monthlyReadingEstimates);
         }
       );
     });
