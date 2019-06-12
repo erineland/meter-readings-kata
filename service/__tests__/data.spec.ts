@@ -5,9 +5,15 @@ import { read, write } from 'fs';
 const sampleData = require('../sampleData.json');
 
 describe('data', () => {
-  it('initialize should import the data from the sampleData file', done => {
+  beforeEach(() => {
     data.initialize();
+  });
 
+  afterEach(() => {
+    data.destroy();
+  })
+
+  it('initialize should import the data from the sampleData file', done => {
     data.connection.serialize(() => {
       data.connection.all(
         'SELECT * FROM meter_reads ORDER BY cumulative',
@@ -66,7 +72,6 @@ describe('data', () => {
   describe('When attempting to get the average monthly usage for each month', () => {
     it('calculates and returns the average monthly usage for all months which have a meter reading', async () => {
       try {
-        data.initialize();
         const expectedMonthlyUsages = [
           { "month": "April", "year": "2017", "estimateEnergyUsageInKwh": 307 },
           { "month": "May", "year": "2017", "estimateEnergyUsageInKwh": 235 },
