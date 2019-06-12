@@ -25,3 +25,14 @@ Notes:
 - Implementing the endpoint now, and adding Koa Bodyparser along with it's Type definitions
 - Now I'm on task 3, I've fleshed out a basic approach with a pen and paper, and am now writing a failing test to call the the as yet non-existent endpoint and expect an array back.
 - Now onto implementing the method on the data model, then exposing it via an API endpoint.
+- Did this via a simple algorithm:
+1. Find the last day of the current record's month
+2. Find the next reading
+3. Find the number of days between the 2 readings
+4. Find the difference in meter readings between the previous and next reading.
+5. Find the average daily usage via energyUsedBetweenReadings /noOfDaysBetweenReadings
+6. If the current reading date is the end of the month, set the reading as the estimate for the end of the month.
+7. Otherwise find the days between the current reading's reading date and end of reading's month
+8. Find ADDITIONAL the amount of energy usage to add to the current reading, to get end of month usage
+9. Now calculate the estimated reading at the end of the month of the current reading.
+10. Then iterate and calculate the monthly usages using the above estimates!
