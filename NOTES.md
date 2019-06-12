@@ -2,7 +2,7 @@ Candidate Name: ***REMOVED*** ***REMOVED***
 
 Tasks: 2.
 
-Time: [To be completed]
+Time: A little extra than asked, 3 or so hours for task 2 and 2 or so on task 3, I want to make a good impression!
 
 Notes:
 [Explain your approach and anything particular of note in your solution]
@@ -14,10 +14,10 @@ Notes:
 - I'm also creating a config file to allow me to more easily setup extra config in the future.
 - Next I'm going to have add a method to the data.ts file to extract out data. I'm going to write a failing test for this first.
 - Created a test for the successful read of data
-- Opted to use async/await because it's clean ES6 syntax
+- Opted to use async/await because it's clean ES6 syntax and supports awaiting promises, vastly improving readability.
 - In the actual implementation I convert the callback based API of SQLite3 into using native Promises which can be awaited.
 - Also setting up a test watch command so that every time I update a test or implementation the tests are automatically re-run.
-- Now I am going to set up the route in Koa, and test it using Supertest.
+- Now I am going to set up the route in Koa, and test it using Supertest. I've not used Koa before but will try to use what I know of Express.
 - Going to forgo setting up Nock for now, this would be an improvement I make later.
 - Writing a test to write the data into the database via a POST endopint, and asserting it worked by directly querying the in-memory database to find my inserted record.
 - This will first require me extending the data layer with a test and method.
