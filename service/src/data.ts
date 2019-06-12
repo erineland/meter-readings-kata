@@ -102,7 +102,6 @@ export function calculateMonthlyAverageUsage() {
           // Iterate the data from the table.
           selectResults.forEach((currentActualReading, index) => {
             const currentReadingDateMoment = moment(currentActualReading.reading_date);
-            console.log(`\n \n Now calculating estimate for the end of the actual reading taken on: ${currentReadingDateMoment.format('DD, MMMM, YYYY')} \n`)
 
             // Find the last day of the current record's month
             const endOfCurrentReadingsMonthDate = currentReadingDateMoment.endOf('month');
@@ -113,14 +112,12 @@ export function calculateMonthlyAverageUsage() {
             if (nextIndex + 1 < selectResults.length) {
               // From 1st to penultimate reading...
               const nextActualReading = selectResults[nextIndex];
-              console.log(`The next actual reading date is: ${moment(nextActualReading.reading_date).format('DD, MMMM, YYYY')}`);
 
               // Find the number of days between the 2 readings
               const noOfDaysBetweenReadings = daysBetween(
                 currentActualReading.reading_date,
                 nextActualReading.reading_date,
               );
-              console.log(`The number of days between the current reading and the next is: ${noOfDaysBetweenReadings}`);
 
               // Find the difference in meter readings between the previous and next reading.
               const energyUsedBetweenReadings = nextActualReading.cumulative - currentActualReading.cumulative;
@@ -143,9 +140,6 @@ export function calculateMonthlyAverageUsage() {
 
               // Now calculate the estimated reading at the end of the month of the current reading.
               let endOfMonthReadingEstimate = Math.round(currentActualReading.cumulative + estimatedAdditionalUsage);
-              console.log(
-                `The endOfMonthReadingEstimate for the month ${currentReadingDateMoment.format('MMMM, YYYY')} is: ${endOfMonthReadingEstimate}`
-              )
 
               const endOfMonthEstimate = {
                 month: currentReadingDateMoment.format('MMMM'),
@@ -158,14 +152,11 @@ export function calculateMonthlyAverageUsage() {
             }
           });
 
-          // Now use the end of month readings to come up with monthly usages.
+          // Now calculate the monthly use, using the end of month reading estimates.
           endOfMonthReadingEstimates.forEach((endOfMonthReading, index) => {
             if (index > 0) {
-              // Now calculate the monthly use, using the end of month reading estimates.
               let estimateEnergyUsageInKwh;
-
               const currentMonthEstimate = endOfMonthReading.estimateInKwh;
-
               const previousMonthEstimate = endOfMonthReadingEstimates[index - 1].estimateInKwh;
 
               estimateEnergyUsageInKwh = Math.round(currentMonthEstimate - previousMonthEstimate);

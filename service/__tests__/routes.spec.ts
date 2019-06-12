@@ -63,67 +63,18 @@ describe('routes', () => {
 
     it('should retrieve a list of monthly average estimated usages', async () => {
         const expectedMonthlyUsages = [
-            {
-                "month": "May",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 337
-            },
-            {
-                "month": "June",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 103
-            },
-            {
-                "month": "July",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 105
-            },
-            {
-                "month": "August",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 167
-            },
-            {
-                "month": "September",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 186
-            },
-            {
-                "month": "October",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 118
-            },
-            {
-                "month": "November",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 1022
-            },
-            {
-                "month": "December",
-                "year": "2017",
-                "estimateEnergyUsageInKwh": 0
-            },
-            {
-                "month": "January",
-                "year": "2018",
-                "estimateEnergyUsageInKwh": 18
-            },
-            {
-                "month": "February",
-                "year": "2018",
-                "estimateEnergyUsageInKwh": 460
-            },
-            {
-                "month": "March",
-                "year": "2018",
-                "estimateEnergyUsageInKwh": 68
-            },
-            {
-                "month": "April",
-                "year": "2018",
-                "estimateEnergyUsageInKwh": 265
-            }
-        ];
+            { "month": "April", "year": "2017", "estimateEnergyUsageInKwh": 307 },
+            { "month": "May", "year": "2017", "estimateEnergyUsageInKwh": 235 },
+            { "month": "June", "year": "2017", "estimateEnergyUsageInKwh": 169 },
+            { "month": "July", "year": "2017", "estimateEnergyUsageInKwh": 132 },
+            { "month": "August", "year": "2017", "estimateEnergyUsageInKwh": 167 },
+            { "month": "September", "year": "2017", "estimateEnergyUsageInKwh": 157 },
+            { "month": "October", "year": "2017", "estimateEnergyUsageInKwh": 251 },
+            { "month": "November", "year": "2017", "estimateEnergyUsageInKwh": 358 },
+            { "month": "December", "year": "2017", "estimateEnergyUsageInKwh": 281 },
+            { "month": "January", "year": "2018", "estimateEnergyUsageInKwh": 339 },
+            { "month": "February", "year": "2018", "estimateEnergyUsageInKwh": 329}
+        ]
 
         try {
             const calculatedMonthlyUsages = await request(instance)
