@@ -11,6 +11,20 @@ function daysBetween(from, to) {
   return Math.floor(msBetween);
 }
 
+function isEndOfMonth(mmt) {
+  // startOf allows to ignore the time component
+  // we call moment(mmt) because startOf and endOf mutate the momentj object.
+  return moment
+    .utc(mmt)
+    .startOf('day')
+    .isSame(
+      moment
+        .utc(mmt)
+        .endOf('month')
+        .startOf('day'),
+    );
+}
+
 export const connection = new SQLite.Database(':memory:');
 
 /**
@@ -126,20 +140,24 @@ export function calculateMonthlyAverageUsage() {
               const averageDailyEnergyUsage = energyUsedBetweenReadings / noOfDaysBetweenReadings;
 
               // TODO: If reading_date is EOM, then the reading is the estimate!!!!
+              let endOfMonthReadingEstimate;
+              if (isEndOfMonth(moment(currentActualReading.reading_date))) {
+                endOfMonthReadingEstimate = currentActualReading.cumulative;
+              } else {
+                // Find the days between the current reading's reading date and end of reading's month
+                const daysToEndOfMonth = daysBetween(
+                  currentActualReading.reading_date,
+                  endOfCurrentReadingsMonthDate.toISOString(),
+                )
+                console.log(`The no of days until the end of the current reading month is: ${daysToEndOfMonth}`);
 
-              // Find the days between the current reading's reading date and end of reading's month
-              const daysToEndOfMonth = daysBetween(
-                currentActualReading.reading_date,
-                endOfCurrentReadingsMonthDate.toISOString(),
-              )
-              console.log(`The no of days until the end of the current reading month is: ${daysToEndOfMonth}`);
+                // Find ADDITIONAL the amount of energy usage to add to the current reading, to get end of month usage
+                const estimatedAdditionalUsage =
+                  daysToEndOfMonth * averageDailyEnergyUsage;
 
-              // Find ADDITIONAL the amount of energy usage to add to the current reading, to get end of month usage
-              const estimatedAdditionalUsage =
-                daysToEndOfMonth * averageDailyEnergyUsage;
-
-              // Now calculate the estimated reading at the end of the month of the current reading.
-              let endOfMonthReadingEstimate = Math.round(currentActualReading.cumulative + estimatedAdditionalUsage);
+                // Now calculate the estimated reading at the end of the month of the current reading.
+                endOfMonthReadingEstimate = Math.round(currentActualReading.cumulative + estimatedAdditionalUsage);
+              }
 
               const endOfMonthEstimate = {
                 month: currentReadingDateMoment.format('MMMM'),
