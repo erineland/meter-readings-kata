@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/***REMOVED***b/.nvm/versions/node/v8.10.0/bin/node /Users/***REMOVED***b/.npm-global/bin/yarn add --dev @types/koa-body
+  /Users/elande/.nvm/versions/node/v8.10.0/bin/node /Users/elande/.npm-global/bin/yarn add --dev @types/koa-body
 
 PATH: 
-  /Users/***REMOVED***b/.nvm/versions/node/v8.10.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/local/share/npm/bin:/Users/***REMOVED***b/.npm-global/lib:/Users/***REMOVED***b/.npm-global/bin/:/Users/***REMOVED***b/.npm-global/lib/node_modules:/usr/local/bin/python:/Library/Python/3.4/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin
+  /Users/elande/.nvm/versions/node/v8.10.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/local/share/npm/bin:/Users/elande/.npm-global/lib:/Users/elande/.npm-global/bin/:/Users/elande/.npm-global/lib/node_modules:/usr/local/bin/python:/Library/Python/3.4/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin
 
 Yarn version: 
   1.7.0
@@ -15,14 +15,14 @@ Platform:
 
 Trace: 
   Error: https://registry.yarnpkg.com/@types%2fkoa-body: Not found
-      at Request.params.callback [as _callback] (/Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:65656:18)
-      at Request.self.callback (/Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:134675:22)
+      at Request.params.callback [as _callback] (/Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:65656:18)
+      at Request.self.callback (/Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:134675:22)
       at emitTwo (events.js:126:13)
       at Request.emit (events.js:214:7)
-      at Request.<anonymous> (/Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:135658:10)
+      at Request.<anonymous> (/Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:135658:10)
       at emitOne (events.js:116:13)
       at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (/Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:135578:12)
+      at IncomingMessage.<anonymous> (/Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:135578:12)
       at Object.onceWrapper (events.js:313:30)
       at emitNone (events.js:111:20)
 

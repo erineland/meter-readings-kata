@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/***REMOVED***b/.nvm/versions/node/v8.10.0/bin/node /Users/***REMOVED***b/.npm-global/bin/yarn build
+  /Users/elande/.nvm/versions/node/v8.10.0/bin/node /Users/elande/.npm-global/bin/yarn build
 
 PATH: 
-  /Users/***REMOVED***b/.nvm/versions/node/v8.10.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/local/share/npm/bin:/Users/***REMOVED***b/.npm-global/lib:/Users/***REMOVED***b/.npm-global/bin/:/Users/***REMOVED***b/.npm-global/lib/node_modules:/usr/local/bin/python:/Library/Python/3.4/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin
+  /Users/elande/.nvm/versions/node/v8.10.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/local/share/npm/bin:/Users/elande/.npm-global/lib:/Users/elande/.npm-global/bin/:/Users/elande/.npm-global/lib/node_modules:/usr/local/bin/python:/Library/Python/3.4/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin
 
 Yarn version: 
   1.7.0
@@ -14,12 +14,12 @@ Platform:
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/***REMOVED***b/Dropbox/Development Projects/Code Katas/Bulb/service/package.json: Unexpected token / in JSON at position 667
+  SyntaxError: /Users/elande/Dropbox/Development Projects/Code Katas/Bulb/service/package.json: Unexpected token / in JSON at position 667
       at JSON.parse (<anonymous>)
-      at /Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:1130:59
+      at /Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:1130:59
       at Generator.next (<anonymous>)
-      at step (/Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:98:30)
-      at /Users/***REMOVED***b/.npm-global/lib/node_modules/yarn/lib/cli.js:109:13
+      at step (/Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /Users/elande/.npm-global/lib/node_modules/yarn/lib/cli.js:109:13
       at <anonymous>
 
 npm manifest: 
